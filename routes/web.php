@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Headqoarter\UserController as HeadquarterUsers;
+use App\Http\Controllers\Headqoarter\RoleController as HeadquarterRoles;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('headquarter')->name('headquarter.')->middleware(['role:Super Admin'])->group( function () {
+    Route::get('/' , function () {
+        return 'hello';
+    });
+    Route::resource('users', HeadquarterUsers::class)->except(['show']);
+    Route::resource('roles', HeadquarterRoles::class)->except(['show']);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

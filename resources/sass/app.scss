@@ -1,9 +1,13 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
-@import 'variables';
+@import "variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
-@import '~bootstrap/dist/css/bootstrap.rtl.min.css';
+@import "~bootstrap/dist/css/bootstrap.rtl.min.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "questioner";
+@import "../css/fontiran.css";
+
+html,
+body {
+    font-family: IRANSansFaNum, sans-serif;
+}

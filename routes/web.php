@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Headqoarter\UserController as HeadquarterUsers;
 use App\Http\Controllers\Headqoarter\RoleController as HeadquarterRoles;
 use App\Http\Controllers\Questioner\DashboardController as QuestionerDashboard;
+use App\Http\Controllers\Questioner\SheetController as QuestionerSheets;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,10 @@ Route::prefix('control-center')->name('controlcenter.')->middleware(['role:Exper
     });
 });
 
-Route::name('questioner.')->middleware(['role:Member'])->resource('/questioner', QuestionerDashboard::class);
+Route::prefix('questioner')->name('questioner.')->middleware(['role:Member'])->group( function () {
+    Route::get('/', [QuestionerDashboard::class, 'index']);
+    Route::resource('sheets', QuestionerSheets::class)->except(['show']);
+});
 
 Auth::routes();
 

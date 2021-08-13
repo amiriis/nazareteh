@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Headqoarter\UserController as HeadquarterUsers;
 use App\Http\Controllers\Headqoarter\RoleController as HeadquarterRoles;
+use App\Http\Controllers\Questioner\DashboardController as QuestionerDashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,11 +35,7 @@ Route::prefix('control-center')->name('controlcenter.')->middleware(['role:Exper
     });
 });
 
-Route::prefix('questioner')->name('questioner.')->middleware(['role:Member'])->group( function () {
-    Route::get('/' , function () {
-        return 'hello Member';
-    });
-});
+Route::name('questioner.')->middleware(['role:Member'])->resource('/questioner', QuestionerDashboard::class);
 
 Auth::routes();
 

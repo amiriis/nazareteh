@@ -15,7 +15,7 @@ class CreateMultipleChoiceAnswersTable extends Migration
     {
         Schema::create('multiple_choice_answers', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->string('user');
             $table->foreignId('sheet_id')
                   ->constrained('sheets');
             $table->foreignId('question_id')

@@ -18,6 +18,8 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         Role::create(['name' => 'Super Admin']);
+        Role::create(['name' => 'Expert']);
+        Role::create(['name' => 'Member']);
 
         $user = new User;
         $user->name = 'رئیس کل';

@@ -15,7 +15,7 @@ class CreateDescriptiveAnswersTable extends Migration
     {
         Schema::create('descriptive_answers', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
+            $table->string('user');
             $table->foreignId('sheet_id')
                   ->constrained('sheets');
             $table->foreignId('question_id')

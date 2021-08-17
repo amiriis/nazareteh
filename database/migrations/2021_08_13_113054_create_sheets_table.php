@@ -19,6 +19,7 @@ class CreateSheetsTable extends Migration
             $table->text('description')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
+            $table->tinyInteger('user_type');
             $table->string('token');
             $table->tinyInteger('status');
             $table->text('expert_description')->nullable();

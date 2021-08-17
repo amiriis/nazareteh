@@ -1480,10 +1480,12 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?94eeade15e6b7fbed95b18ff3
     url(/fonts/iransansfanum.ttf?732cabbff87f779b74d3ee5741eb933f) format('truetype');
 }
 
+[aria-hidden=true] {
+  display: none;
+}
+
 .questions-box {
-  border: 1px solid #dcdcdc;
-  border-right: 0;
-  border-left: 0;
+  border-top: 1px solid #dcdcdc;
   border-radius: 8px;
 }
 
@@ -1493,7 +1495,7 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?94eeade15e6b7fbed95b18ff3
   border-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  transition: 0.3s all;
+  transition: 0.2s all;
   color: rgba(0, 0, 0, 0.5);
 }
 .question-container .question-item-box .question-item-title {
@@ -1527,7 +1529,7 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?94eeade15e6b7fbed95b18ff3
 .question-add-box {
   border: 1px solid #dcdcdc;
   border-radius: 8px;
-  transition: 0.3s all;
+  transition: 0.2s all;
   color: rgba(0, 0, 0, 0.5);
 }
 .question-add-box:hover {
@@ -1540,13 +1542,30 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?94eeade15e6b7fbed95b18ff3
 }
 
 .question-content {
-  border: 1px solid #dcdcdc;
-  border-right: 0;
-  border-left: 0;
+  border-top: 1px solid #dcdcdc;
   border-radius: 8px;
+}
+
+.choice-add-box {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  transition: 0.2s all;
+  color: rgba(0, 0, 0, 0.5);
+}
+.choice-add-box:hover {
+  background-color: #eee;
+  cursor: pointer;
+  border-color: #c3c3c3;
+}
+.choice-add-box .question-add-icon {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 html,
 body {
   font-family: IRANSansFaNum, sans-serif;
+}
+
+textarea {
+  resize: none;
 }

@@ -36,7 +36,7 @@ class SheetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

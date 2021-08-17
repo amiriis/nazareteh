@@ -5,10 +5,12 @@ $text_dark: rgba(
     $alpha: 0.5,
 );
 
+[aria-hidden="true"] {
+    display: none;
+}
+
 .questions-box{
-    border: 1px solid $border_color;
-    border-right: 0;
-    border-left: 0;
+    border-top: 1px solid $border_color;
     border-radius: 8px;
 }
 
@@ -19,7 +21,7 @@ $text_dark: rgba(
         border-left: 0;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        transition: 0.3s all;
+        transition: 0.2s all;
         color: $text_dark;
         .question-item-title {
             border-right: 1px solid $border_color;
@@ -54,7 +56,7 @@ $text_dark: rgba(
 .question-add-box {
     border: 1px solid $border_color;
     border-radius: 8px;
-    transition: 0.3s all;
+    transition: 0.2s all;
     color: rgba($color: #000000, $alpha: 0.5);
     &:hover {
         background-color: #eee;
@@ -67,8 +69,21 @@ $text_dark: rgba(
 }
 
 .question-content{
-    border: 1px solid $border_color;
-    border-right: 0;
-    border-left: 0;
+    border-top: 1px solid $border_color;
     border-radius: 8px;
+}
+
+.choice-add-box {
+    border: 1px solid $border_color;
+    border-radius: 8px;
+    transition: 0.2s all;
+    color: rgba($color: #000000, $alpha: 0.5);
+    &:hover {
+        background-color: #eee;
+        cursor: pointer;
+        border-color: darken($color: $border_color, $amount: 10);
+    }
+    .question-add-icon {
+        color: $text_dark;
+    }
 }

@@ -9,7 +9,7 @@ $text_dark: rgba(
     display: none;
 }
 
-.questions-box{
+.questions-box {
     border-top: 1px solid $border_color;
     border-radius: 8px;
 }
@@ -18,9 +18,6 @@ $text_dark: rgba(
     .question-item-box {
         border: 1px solid $border_color;
         border-radius: 8px;
-        border-left: 0;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
         transition: 0.2s all;
         color: $text_dark;
         .question-item-title {
@@ -41,6 +38,13 @@ $text_dark: rgba(
             .question-item-title {
                 border-color: darken($color: $active_items, $amount: 10);
             }
+        }
+    }
+    &:not(:first-child) {
+        .question-item-box {
+            border-left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
         }
     }
     .question-item-delete {
@@ -68,7 +72,7 @@ $text_dark: rgba(
     }
 }
 
-.question-content{
+.question-content {
     border-top: 1px solid $border_color;
     border-radius: 8px;
 }

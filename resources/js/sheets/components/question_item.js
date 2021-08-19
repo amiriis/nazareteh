@@ -9,14 +9,18 @@ export function addQuestionItem({
 }) {
     const id = (mode == 'add') ? ($('.question-container').last().data('questionId') ?? 0) + 1 : createId
 
+    const isFirst = ($('.question-container').length == 0) ? true : false
+
     let content = `<div class="d-flex question-container my-2" id="question-item-${id}" data-question-id="${id}">
-                        <div class="col-11 d-flex align-items-center question-item-box">
+                        <div div class = "${!isFirst ? `col-11` : `col-12`} d-flex align-items-center question-item-box" >
                             <span class="col p-2 text-center question-item-num"></span>
                             <span class="col-11 p-2 question-item-title">عنوان سوال</span>
                         </div>
-                        <div class="col-1 d-flex align-items-center justify-content-center question-item-delete">
+                        ${!isFirst ?
+                            `<div class="col-1 d-flex align-items-center justify-content-center question-item-delete">
                             <i class="bi-trash"></i>
-                        </div>
+                            </div>`: ``
+                        }
                     </div>`
 
     $('.questions-box').append(content)

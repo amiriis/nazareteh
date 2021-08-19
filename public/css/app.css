@@ -1492,9 +1492,6 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?94eeade15e6b7fbed95b18ff3
 .question-container .question-item-box {
   border: 1px solid #dcdcdc;
   border-radius: 8px;
-  border-left: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
   transition: 0.2s all;
   color: rgba(0, 0, 0, 0.5);
 }
@@ -1516,6 +1513,11 @@ url(/fonts/vendor/bootstrap-icons/bootstrap-icons.woff?94eeade15e6b7fbed95b18ff3
 }
 .question-container .question-item-box.active .question-item-title {
   border-color: #356697;
+}
+.question-container:not(:first-child) .question-item-box {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 .question-container .question-item-delete {
   background-color: var(--bs-danger);

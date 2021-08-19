@@ -61,6 +61,12 @@ import {
         })
 })()
 
+$(document).ready(function () {
+    addQuestionItem({
+        mode: 'add'
+    })
+})
+
 $(document).on('click', '.question-add-box', function () {
     addQuestionItem({
         mode: 'add'

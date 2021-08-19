@@ -6,6 +6,7 @@ use App\Http\Controllers\Headqoarter\UserController as HeadquarterUsers;
 use App\Http\Controllers\Headqoarter\RoleController as HeadquarterRoles;
 use App\Http\Controllers\Questioner\DashboardController as QuestionerDashboard;
 use App\Http\Controllers\Questioner\SheetController as QuestionerSheets;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------

@@ -15,12 +15,16 @@ class CreateSheetsTable extends Migration
     {
         Schema::create('sheets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->tinyInteger('user_type');
-            $table->string('token');
+            $table->string('token')->nullable();
             $table->tinyInteger('status');
             $table->text('expert_description')->nullable();
             $table->timestamps();

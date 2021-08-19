@@ -9,6 +9,8 @@ class Question extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function sheet()
     {
         return $this->belongsTo(Sheet::class);

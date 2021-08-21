@@ -11,6 +11,8 @@ class Question extends Model
 
     public $timestamps = false;
 
+    protected $appends = array('choice_count');
+
     public function sheet()
     {
         return $this->belongsTo(Sheet::class);
@@ -29,5 +31,10 @@ class Question extends Model
     public function multipleChoiceAnswers()
     {
         return $this->hasMany(MultipleChoiceAnswer::class);
+    }
+
+    public function getChoiceCountAttribute()
+    {
+        return $this->choices->count();
     }
 }

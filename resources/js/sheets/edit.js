@@ -62,9 +62,39 @@ import {
 })()
 
 $(document).ready(function () {
-    addQuestionItem({
-        mode: 'add'
-    })
+    for (let index = 0; index < questions.length; index++) {
+        const question = questions[index];
+        console.log(question);
+        addQuestionItem({
+            createId: question.id,
+            title: question.title,
+            description: question.description,
+            has_choice: question.has_choice,
+            has_descriptive: question.has_descriptive,
+            has_multiple_choice: question.has_multiple_choice,
+            choice_count: question.choice_count,
+            mode: 'edit'
+        })
+
+        if (question.has_choice == 1) {
+            const parent = $(`#question-box-${question.id}`)
+            parent.find('.multiple-choice-container').attr('aria-hidden', false)
+            parent.find('.choice-container').attr('aria-hidden', false)
+            parent.find('.choice-input').prop('disabled', false);
+        }
+    }
+
+    for (let index = 0; index < choices.length; index++) {
+        const choice = choices[index];
+        addChoiceItem({
+            createId: choice.id,
+            questionId: choice.question_id,
+            questionMode: 'edit',
+            title: choice.title,
+            mode: 'edit',
+            hasDisabled: false
+        })
+    }
 })
 
 $(document).on('click', '.question-add-box', function () {
@@ -78,6 +108,7 @@ $(document).on('click', '.question-add-box', function () {
 $(document).on('click', '.question-item-delete', function () {
     removeQuestionItem({
         id: $(this).parents('.question-container').data('questionId'),
+        questionMode: $(this).parents('.question-container').data('questionMode'),
         mode: 'delete'
     })
 })

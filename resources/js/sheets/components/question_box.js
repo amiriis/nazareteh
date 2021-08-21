@@ -4,6 +4,12 @@ import {
 
 export function addQuestionBox({
     id,
+    title,
+    description,
+    has_choice,
+    has_descriptive,
+    has_multiple_choice,
+    choice_count,
     mode
 }) {
     let content = `<div class="question-form" id="question-box-${id}" data-question-mode="${mode}" data-question-id="${id}" data-question-num="" aria-hidden="true">
@@ -19,7 +25,7 @@ export function addQuestionBox({
                                 class="form-control question-title-input"
                                 id="question[${mode}][${id}][title]"
                                 name="question[${mode}][${id}][title]"
-                                    placeholder="عنوان سوال" required>
+                                    placeholder="عنوان سوال" value="${title??``}" required>
                                 <label for="question[${mode}][${id}][title]">عنوان</label>
                                 <div class="invalid-feedback">
                                     لطفا عنوان سوال را وارد نمایید
@@ -30,7 +36,7 @@ export function addQuestionBox({
                                 id = "question[${mode}][${id}][description]"
                                 name = "question[${mode}][${id}][description]"
                                 style = "height: 100px"
-                                    placeholder="توضیحات سوال"></textarea>
+                                    placeholder="توضیحات سوال">${description??``}</textarea>
                                 <label for="question[${mode}][${id}][description]">توضیحات</label>
                                 <div id="descriptionQuestionHelp" class="form-text">(اختیاری)
                                 در صورت نیاز به توضیح بیشتر از این بخش استفاده کنید
@@ -44,18 +50,18 @@ export function addQuestionBox({
                             <div id="descriptionQuestionHelp" class="form-text mb-3">حداقل باید یک نوع پاسخ انتخاب کنید
                             </div>
                             <div class="form-check form-switch mb-3">
-                                <input checked class="has-descriptive-input form-check-input" type="checkbox" id="question[${mode}][${id}][has_descriptive]"
+                                <input ${mode == 'edit' ? has_descriptive == 1 ? `checked` : `` : `checked`} class="has-descriptive-input form-check-input" type="checkbox" id="question[${mode}][${id}][has_descriptive]"
                                     name="question[${mode}][${id}][has_descriptive]">
                                 <label class="form-check-label" for="question[${mode}][${id}][has_descriptive]">دارای پاسخ تشریحی می باشد</label>
                             </div>
                             <div class="form-check form-switch mb-4">
-                                <input class="has-choice-input form-check-input" type="checkbox" id="question[${mode}][${id}][has_choice]" name="question[${mode}][${id}][has_choice]">
+                                <input ${mode == 'edit' ? has_choice == 1 ? `checked` : `` : ``} class="has-choice-input form-check-input" type="checkbox" id="question[${mode}][${id}][has_choice]" name="question[${mode}][${id}][has_choice]">
                                 <label class="form-check-label" for="question[${mode}][${id}][has_choice]">دارای پاسخ گزینه ای می باشد</label>
                             </div>
                             <div class="multiple-choice-container form-check form-switch mb-3"
                             aria-hidden="true">
-                                <input class="form-check-input" type="checkbox" id="question[${mode}][${id}][has_multiple_choice]"
-                                    name="question[${mode}][${id}][has_multiple_choice]">
+                                <input ${mode == 'edit' ? has_multiple_choice == 1 ? `checked` : `` : ``} class="has-multiple-choice-input form-check-input" type="checkbox" id="question[${mode}][${id}][has_multiple_choice]"
+                                    name="question[${mode}][${id}][has_multiple_choice]" ${mode == 'edit' ? has_choice == 1 ? ``: `disabled` : `disabled`}>
                                 <label class="form-check-label"
                                 for="question[${mode}][${id}][has_multiple_choice]" > دارای چند انتخاب هم زمان می
                                     باشد</label>
@@ -77,12 +83,23 @@ export function addQuestionBox({
 
     $('.question-forms').append(content)
 
-    addChoiceItem({
-        questionId: id,
-        questionMode: mode,
-        mode: 'add',
-        hasDisabled: true
-    })
+    if (mode == 'add') {
+        addChoiceItem({
+            questionId: id,
+            questionMode: mode,
+            mode: 'add',
+            hasDisabled: true
+        })
+    }
+
+    if (mode == 'edit' && choice_count == 0) {
+        addChoiceItem({
+            questionId: id,
+            questionMode: mode,
+            mode: 'add',
+            hasDisabled: true
+        })
+    }
 }
 
 

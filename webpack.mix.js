@@ -13,5 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/sheets/create.js', 'public/js/sheets')
+    .js('resources/js/sheets/edit.js', 'public/js/sheets')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();

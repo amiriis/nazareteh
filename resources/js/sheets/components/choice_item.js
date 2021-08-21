@@ -2,6 +2,7 @@ export function addChoiceItem({
     createId,
     questionId,
     questionMode,
+    title,
     mode,
     hasDisabled
 }) {
@@ -12,7 +13,7 @@ export function addChoiceItem({
                         <input type="text"
                         class="form-control choice-input"
                         id="question[${questionMode}][${questionId}][choice][${mode}][${id}]"
-                        name="question[${questionMode}][${questionId}][choice][${mode}][${id}]" required ${hasDisabled ? 'disabled': ''}>
+                        name="question[${questionMode}][${questionId}][choice][${mode}][${id}]" value="${title ?? ``}" required ${hasDisabled ? 'disabled': ''}>
                         ${!isFirst ?
                        `<button class="btn btn-danger choice-item-delete" type="button"><i class="bi-trash"></i></button>`
                         : ``}
@@ -31,4 +32,7 @@ export function removeChoiceItem({
     mode
 }) {
     $(`#choice-${questionId}-${id}`).remove()
+    if (questionMode == 'edit') {
+        $('.delete-choices').append(`<input type="hidden" name="choices[delete][]" value="${id}">`)
+    }
 }

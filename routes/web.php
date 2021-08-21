@@ -23,23 +23,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('headquarter')->name('headquarter.')->middleware(['role:Super Admin'])->group( function () {
-    Route::get('/' , function () {
+Route::prefix('headquarter')->name('headquarter.')->middleware(['role:Super Admin'])->group(function () {
+    Route::get('/', function () {
         return 'hello Super Admin';
     });
     Route::resource('users', HeadquarterUsers::class)->except(['show']);
     Route::resource('roles', HeadquarterRoles::class)->except(['show']);
 });
 
-Route::prefix('control-center')->name('controlcenter.')->middleware(['role:Expert'])->group( function () {
-    Route::get('/' , function () {
+Route::prefix('control-center')->name('controlcenter.')->middleware(['role:Expert'])->group(function () {
+    Route::get('/', function () {
         return 'hello Expert';
     });
 });
 
-Route::prefix('questioner')->name('questioner.')->middleware(['role:Member'])->group( function () {
-    Route::get('/', [QuestionerDashboard::class, 'index']);
+Route::prefix('questioner')->name('questioner.')->middleware(['role:Member'])->group(function () {
+    Route::get('/', [
+        QuestionerDashboard::class,
+        'index'
+    ]);
     Route::resource('sheets', QuestionerSheets::class)->except(['show']);
+    Route::match(['put', 'patch'], 'sheets/{sheet}/start', [QuestionerSheets::class, 'start'])->name('sheets.start');
+    Route::match(['put', 'patch'], 'sheets/{sheet}/end', [QuestionerSheets::class, 'end'])->name('sheets.end');
+    Route::get('sheets/{sheet}/report', [QuestionerSheets::class, 'report'])->name('sheets.report');
 });
 
 Auth::routes();

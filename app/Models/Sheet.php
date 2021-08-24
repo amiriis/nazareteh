@@ -69,7 +69,7 @@ class Sheet extends Model
                 $text = 'عدم تایید توسط کارشناس';
                 break;
             case '1':
-                $text = 'تایید شده توسط کارشناس';
+                $text = 'شروع نشده';
                 break;
             case '2':
                 $text = 'در حال بررسی توسط کارشناس';
@@ -89,11 +89,26 @@ class Sheet extends Model
     {
         if ($this->token == null)
             return '';
-        return env('APP_URL') . '/r/' . $this->token;
+        return url( "/r/$this->token");
     }
 
     public function getQuestionsCountAttribute()
     {
         return $this->questions->count();
+    }
+
+    public function getQuestionsDescriptiveCountAttribute()
+    {
+        return $this->questions->where('has_descriptive', 1)->where('has_choice', 0)->count();
+    }
+
+    public function getQuestionsChoiceCountAttribute()
+    {
+        return $this->questions->where('has_descriptive', 0)->where('has_choice', 1)->count();
+    }
+
+    public function getQuestionsChoiceAndDescriptiveCountAttribute()
+    {
+        return $this->questions->where('has_descriptive', 1)->where('has_choice', 1)->count();
     }
 }

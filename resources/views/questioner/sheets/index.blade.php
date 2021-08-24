@@ -18,43 +18,44 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
     <div class="table-responsive">
-        <table class="table table-bordered table-sm align-middle text-center">
-            <thead class="table-light">
+        <table class="table table-bordered text-center">
+            <thead class="table-light align-middle">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">نام</th>
-                    <th scope="col">تعداد سوالات</th>
-                    <th scope="col">زمان شروع</th>
-                    <th scope="col">زمان پایان</th>
-                    <th scope="col">وضعیت</th>
-                    <th scope="col">لینک</th>
-                    <th scope="col">تاریخ ثیت</th>
-                    <th scope="col">عملیات</th>
+                    <th scope="col" rowspan="2">#</th>
+                    <th scope="col" rowspan="2">نام</th>
+                    <th scope="col" colspan="3">تعداد سوال ها</th>
+                    <th scope="col" rowspan="2">زمان شروع</th>
+                    <th scope="col" rowspan="2">زمان پایان</th>
+                    <th scope="col" rowspan="2">وضعیت</th>
+                    <th scope="col" rowspan="2">تاریخ ثیت</th>
+                    <th scope="col" rowspan="2">تعداد پاسخ ها</th>
+                    <th scope="col" rowspan="2">عملیات</th>
+                </tr>
+                <tr>
+                    <th scope="col">تشریحی</th>
+                    <th scope="col">گزینه ای</th>
+                    <th scope="col">تشریحی + گزینه ای</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="align-middle">
                 @forelse ($sheets as $sheet)
-                    <tr class="copy-container">
+                    <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $sheet->name }}</td>
-                        <td>{{ $sheet->questions_count }}</td>
+                        <td>{{ $sheet->questions_descriptive_count }}</td>
+                        <td>{{ $sheet->questions_choice_count }}</td>
+                        <td>{{ $sheet->questions_choice_and_descriptive_count }}</td>
                         <td>{{ $sheet->start_date_fa }}</td>
                         <td>{{ $sheet->end_date_fa }}</td>
                         <td>{{ $sheet->status_fa }}</td>
-                        <td>
-                            <span class="copy-text">{{ $sheet->url }}</span>
-                            @if ($sheet->is_stated && !$sheet->is_ended)<button
-                                    class="copy-btn btn btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="top" title="کپی"><i class="bi bi-clipboard-plus"></i>
-                                </button>
-                            @endif
-                        </td>
                         <td>{{ $sheet->created_at_fa }}</td>
+                        <td></td>
                         <td>
                             @if ($sheet->is_stated)
                                 @if (!$sheet->is_ended)
@@ -62,6 +63,10 @@
                                         form="end_sheet_{{ $sheet->id }}" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="پایان نظرسنجی"><i
                                             class="bi bi-pause-fill"></i></button>
+                                    <button class="url-sheet btn btn-sm btn-outline-dark pt-2" value="{{ $sheet->url }}"
+                                        type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        title="لینک نظرسنجی"><i class="bi bi-share-fill"></i>
+                                    </button>
                                 @endif
                             @else
                                 @if ($sheet->status == 1)
@@ -73,7 +78,7 @@
                                 <a class="btn btn-sm btn-outline-dark pt-2"
                                     href="{{ route('questioner.sheets.edit', $sheet) }}" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="ویرایش"><i class="bi bi-pencil-fill"></i></a>
-                                <button class="btn btn-sm btn-outline-danger pt-2" type="submit"
+                                <button class="btn-delete-sheet btn btn-sm btn-outline-danger pt-2" type="button"
                                     form="delete_sheet_{{ $sheet->id }}" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="حذف"><i class="bi bi-trash-fill"></i></button>
                             @endif
@@ -116,15 +121,32 @@
 
 @section('scripts-body')
     <script>
-        $(document).on('click', '.copy-btn', function() {
-            var parent = $(this).parents('.copy-container')
-            var copyText = parent.find('.copy-text').text()
+        $(document).on('click', '.url-sheet', function() {
+            const copyText = $(this).val()
 
             navigator.clipboard.writeText(copyText);
 
             Toast.fire({
                 icon: 'success',
-                title: 'لینک در کپی شد'
+                title: 'لینک کپی شد'
+            })
+        })
+
+        $(document).on('click', '.btn-delete-sheet', function(e) {
+            const form = $(`#${$(this).attr('form')}`)
+            Swal.fire({
+                title: 'حذف نظرسنجی',
+                text: 'آیا میخواهید نظرسنجی مورد نظر را حدف کنید',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله حذف کن',
+                cancelButtonText: 'خیر'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit()
+                }
             })
         })
     </script>

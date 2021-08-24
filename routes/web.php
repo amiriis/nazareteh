@@ -6,6 +6,7 @@ use App\Http\Controllers\Headqoarter\UserController as HeadquarterUsers;
 use App\Http\Controllers\Headqoarter\RoleController as HeadquarterRoles;
 use App\Http\Controllers\Questioner\DashboardController as QuestionerDashboard;
 use App\Http\Controllers\Questioner\SheetController as QuestionerSheets;
+use App\Http\Controllers\Responder\SheetController as ResponderSheets;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -47,6 +48,8 @@ Route::prefix('questioner')->name('questioner.')->middleware(['role:Member'])->g
     Route::match(['put', 'patch'], 'sheets/{sheet}/end', [QuestionerSheets::class, 'end'])->name('sheets.end');
     Route::get('sheets/{sheet}/report', [QuestionerSheets::class, 'report'])->name('sheets.report');
 });
+
+Route::get('r/{sheet:token}', [ResponderSheets::class, 'index'])->name('responder.index');
 
 Auth::routes();
 

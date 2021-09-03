@@ -49,7 +49,13 @@ Route::prefix('questioner')->name('questioner.')->middleware(['role:Member'])->g
     Route::get('sheets/{sheet}/report', [QuestionerSheets::class, 'report'])->name('sheets.report');
 });
 
-Route::get('r/{sheet:token}', [ResponderSheets::class, 'index'])->name('responder.index');
+Route::prefix('r')->name('reponder.')->group(function () {
+    Route::get('{sheet:token}', [ResponderSheets::class, 'index'])->name('index');
+    Route::get('{sheet:token}/thanks', [ResponderSheets::class, 'thanks'])->name('thanks');
+    Route::post('{sheet:token}', [ResponderSheets::class, 'login'])->name('login');
+    Route::get('{sheet:token}/{responder:token}', [ResponderSheets::class, 'show'])->name('show');
+    Route::post('{sheet:token}/{responder:token}', [ResponderSheets::class, 'store'])->name('store');
+});
 
 Auth::routes();
 

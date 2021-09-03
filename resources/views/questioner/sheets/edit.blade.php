@@ -16,10 +16,15 @@
                 @endforeach
             @endif
         @endforeach
+        var serverToJs = {
+            questions: questions,
+            choices: choices
+        }
     </script>
 @endsection
 
 @section('styles')
+    <link href="{{ asset('css/questioner.css') }}" rel="stylesheet">
     <style>
         body {
             overflow-y: scroll;

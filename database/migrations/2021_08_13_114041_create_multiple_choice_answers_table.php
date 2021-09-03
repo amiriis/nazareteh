@@ -15,13 +15,22 @@ class CreateMultipleChoiceAnswersTable extends Migration
     {
         Schema::create('multiple_choice_answers', function (Blueprint $table) {
             $table->id();
-            $table->string('user');
+            $table->foreignId('responder_id')
+                ->constrained('responders')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('sheet_id')
-                  ->constrained('sheets');
+                ->constrained('sheets')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('question_id')
-                  ->constrained('questions');
+                ->constrained('questions')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('choice_id')
-                  ->constrained('choices');
+                ->constrained('choices')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

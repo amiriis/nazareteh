@@ -21,8 +21,8 @@ class CreateSheetsTable extends Migration
                 ->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('end_at')->nullable();
             $table->tinyInteger('user_type');
             $table->string('token')->nullable();
             $table->tinyInteger('status');

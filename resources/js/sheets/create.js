@@ -59,13 +59,11 @@ import {
                 form.classList.add('was-validated')
             }, false)
         })
-})()
 
-$(document).ready(function () {
-    addQuestionItem({
-        mode: 'add'
-    })
-})
+        addQuestionItem({
+            mode: 'add'
+        })
+})()
 
 $(document).on('click', '.question-add-box', function () {
     addQuestionItem({

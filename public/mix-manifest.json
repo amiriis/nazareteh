@@ -2,5 +2,9 @@
     "/js/app.js": "/js/app.js",
     "/js/sheets/create.js": "/js/sheets/create.js",
     "/js/sheets/edit.js": "/js/sheets/edit.js",
-    "/css/app.css": "/css/app.css"
+    "/js/sheets/login.js": "/js/sheets/login.js",
+    "/js/sheets/show.js": "/js/sheets/show.js",
+    "/css/app.css": "/css/app.css",
+    "/css/responder.css": "/css/responder.css",
+    "/css/questioner.css": "/css/questioner.css"
 }

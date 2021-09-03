@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Morilog\Jalali\CalendarUtils;
@@ -20,42 +21,47 @@ class Sheet extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function responders()
+    {
+        return $this->hasMany(Responder::class);
+    }
+
     public function getCreatedAtFaAttribute()
     {
         return CalendarUtils::strftime('H:i Y/m/d', strtotime($this->created_at));
     }
 
-    public function getStartDateFaAttribute()
+    public function getStartAtFaAttribute()
     {
-        if ($this->start_date == null)
+        if ($this->start_at == null)
             return '-';
-        return CalendarUtils::strftime('H:i Y/m/d', strtotime($this->start_date));
+        return CalendarUtils::strftime('H:i Y/m/d', strtotime($this->start_at));
     }
 
     public function getIsStatedAttribute()
     {
-        if ($this->start_date == null)
+        if ($this->start_at == null)
             return false;
 
-        if ($this->start_date > date("Y-m-d H:i:s"))
+        if ($this->start_at > date("Y-m-d H:i:s"))
             return false;
 
         return true;
     }
 
-    public function getEndDateFaAttribute()
+    public function getEndAtFaAttribute()
     {
-        if ($this->end_date == null)
+        if ($this->end_at == null)
             return '-';
-        return CalendarUtils::strftime('H:%M Y/m/d', strtotime($this->end_date));
+        return CalendarUtils::strftime('H:%M Y/m/d', strtotime($this->end_at));
     }
 
     public function getIsEndedAttribute()
     {
-        if ($this->end_date == null)
+        if ($this->end_at == null)
             return false;
 
-        if ($this->end_date > date("Y-m-d H:i:s"))
+        if ($this->end_at > date("Y-m-d H:i:s"))
             return false;
 
         return true;
@@ -85,11 +91,29 @@ class Sheet extends Model
         return $text;
     }
 
+    public function getUserTypeFaAttribute()
+    {
+        $text = '';
+        switch ($this->user_type) {
+            case '1':
+                $text = 'کد ملی';
+                break;
+            case '2':
+                $text = 'شماره همراه';
+                break;
+            case '3':
+                $text = 'پست الکترونیک';
+                break;
+        }
+
+        return $text;
+    }
+
     public function getUrlAttribute()
     {
         if ($this->token == null)
             return '';
-        return url( "/r/$this->token");
+        return url("/r/$this->token");
     }
 
     public function getQuestionsCountAttribute()

@@ -4,6 +4,10 @@
     نظرسنجی ها
 @endsection
 
+@section('styles')
+    <link href="{{ asset('css/questioner.css') }}" rel="stylesheet">
+@endsection
+
 @section('breadcrumb')
     <div class="d-flex align-items-center justify-content-between mb-2">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -51,11 +55,11 @@
                         <td>{{ $sheet->questions_descriptive_count }}</td>
                         <td>{{ $sheet->questions_choice_count }}</td>
                         <td>{{ $sheet->questions_choice_and_descriptive_count }}</td>
-                        <td>{{ $sheet->start_date_fa }}</td>
-                        <td>{{ $sheet->end_date_fa }}</td>
+                        <td>{{ $sheet->start_at_fa }}</td>
+                        <td>{{ $sheet->end_at_fa }}</td>
                         <td>{{ $sheet->status_fa }}</td>
                         <td>{{ $sheet->created_at_fa }}</td>
-                        <td></td>
+                        <td>{{ $sheet->responders->count() }}</td>
                         <td>
                             @if ($sheet->is_stated)
                                 @if (!$sheet->is_ended)
@@ -86,6 +90,9 @@
                                 <a class="btn btn-sm btn-outline-dark pt-2"
                                     href="{{ route('questioner.sheets.report', $sheet) }}" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="گزارش نظرسنجی"><i class="bi bi-bar-chart-fill"></i></a>
+                                <button class="btn-delete-sheet btn btn-sm btn-outline-danger pt-2" type="button"
+                                    form="delete_sheet_{{ $sheet->id }}" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="حذف"><i class="bi bi-trash-fill"></i></button>
                             @endif
                             @if ($sheet->is_stated && !$sheet->is_ended)
                                 <form id="end_sheet_{{ $sheet->id }}"
@@ -111,7 +118,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">نظرسنجی ایجاد نشده است</td>
+                        <td colspan="11" class="text-center">نظرسنجی ایجاد نشده است</td>
                     </tr>
                 @endforelse
             </tbody>

@@ -19,7 +19,7 @@ class SheetController extends Controller
     public function index()
     {
         $sheets = Auth::user()->sheets;
-        return view('questioner.sheets.index', compact('sheets'));
+        return view('questioner.sheets.index', ['sheets' => $sheets]);
     }
 
     /**
@@ -96,7 +96,7 @@ class SheetController extends Controller
         $sheet = Auth::user()->sheets->find($id);
         if (!$sheet) abort(404);
 
-        return view('questioner.sheets.edit', compact('sheet'));
+        return view('questioner.sheets.edit', ['sheet' => $sheet]);
         //
     }
 
@@ -218,7 +218,7 @@ class SheetController extends Controller
         if (!$sheet) abort(404);
 
         $sheet->status = 3;
-        $sheet->start_date = date("Y-m-d H:i:s");
+        $sheet->start_at = date("Y-m-d H:i:s");
         $sheet->token = $this->createToken($sheet->id);
         $sheet->save();
 
@@ -231,7 +231,7 @@ class SheetController extends Controller
         if (!$sheet) abort(404);
 
         $sheet->status = 4;
-        $sheet->end_date = date("Y-m-d H:i:s");
+        $sheet->end_at = date("Y-m-d H:i:s");
         $sheet->token = null;
         $sheet->save();
 

@@ -18,13 +18,23 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         Role::create(['name' => 'Super Admin']);
+        Role::create(['name' => 'Expert']);
+        Role::create(['name' => 'Member']);
+
+        $admin = new User;
+        $admin->name = 'رئیس کل';
+        $admin->email = 'ceo@nazareteh.ir';
+        $admin->password = Hash::make('amir1374720');
+        $admin->save();
+
+        $admin->assignRole('Super Admin');
 
         $user = new User;
-        $user->name = 'رئیس کل';
-        $user->email = 'ceo@nazareteh.ir';
-        $user->password = Hash::make('amir1374720');
+        $user->name = 'امیرحسین محمودی';
+        $user->email = 'test@test.com';
+        $user->password = Hash::make('123456789');
         $user->save();
 
-        $user->assignRole('Super Admin');
+        $user->assignRole('Member');
     }
 }

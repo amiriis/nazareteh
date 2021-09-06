@@ -1,0 +1,16 @@
+body {
+  background-color: #f1f1f1;
+  width: 100vw;
+  height: 100vh;
+}
+
+[aria-hidden=true] {
+  display: none;
+}
+
+.page-container {
+  background-color: #fff;
+  width: 40vw;
+  border-radius: 8px;
+  border: 1px solid #d5d5d5;
+}

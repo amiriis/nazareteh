@@ -1,0 +1,16 @@
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/dist/css/bootstrap.rtl.min.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "../css/fontiran.css";
+
+html,
+body {
+    font-family: IRANSansFaNum, sans-serif;
+}
+
+textarea{
+    resize: none;
+}

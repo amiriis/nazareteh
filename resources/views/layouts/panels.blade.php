@@ -24,7 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1"><img src="{{asset('images/logo.png')}}" alt="" height="24"></span>
+                <a class="navbar-brand" href="{{route('welcome')}}">نظرتــه</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">

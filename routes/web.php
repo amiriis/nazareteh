@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::prefix('headquarter')->name('headquarter.')->middleware(['role:Super Admin'])->group(function () {
     Route::get('/', function () {

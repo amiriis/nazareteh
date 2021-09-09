@@ -1,4 +1,4 @@
-@extends('layouts.responder')
+@extends('layouts.pages')
 
 @section('title')
     {{ $sheet->name }}

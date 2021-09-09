@@ -11,7 +11,7 @@ export function addQuestionContainer({
     let content = `<div class="question-container" data-question-num="" data-question-id="${id}" aria-hidden="true">
                 <div class="h4 mb-3"><span class="question-num"></span>.<span class="question-title p-1">${title}</span>
                 </div>
-                <p class="question-description mb-3">${description}</p>`
+                <p class="question-description mb-3">${description ?? ''}</p>`
     if (has_choice) {
         content += `<div class="list-group mb-3">`
         if (has_multiple_choice) {

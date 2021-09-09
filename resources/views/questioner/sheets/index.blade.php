@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.panels')
 
 @section('title')
     نظرسنجی ها
@@ -33,18 +33,17 @@
                 <tr>
                     <th scope="col" rowspan="2">#</th>
                     <th scope="col" rowspan="2">نام</th>
-                    <th scope="col" colspan="3">تعداد سوال ها</th>
-                    <th scope="col" rowspan="2">زمان شروع</th>
-                    <th scope="col" rowspan="2">زمان پایان</th>
+                    <th scope="col" colspan="5">تعداد سوال ها</th>
                     <th scope="col" rowspan="2">وضعیت</th>
                     <th scope="col" rowspan="2">تاریخ ثیت</th>
-                    <th scope="col" rowspan="2">تعداد پاسخ ها</th>
                     <th scope="col" rowspan="2">عملیات</th>
                 </tr>
                 <tr>
                     <th scope="col">تشریحی</th>
                     <th scope="col">گزینه ای</th>
+                    <th scope="col">انتخابی</th>
                     <th scope="col">تشریحی + گزینه ای</th>
+                    <th scope="col">تشریحی + انتخابی</th>
                 </tr>
             </thead>
             <tbody class="align-middle">
@@ -54,12 +53,11 @@
                         <td>{{ $sheet->name }}</td>
                         <td>{{ $sheet->questions_descriptive_count }}</td>
                         <td>{{ $sheet->questions_choice_count }}</td>
+                        <td>{{ $sheet->questions_multi_choice_count }}</td>
                         <td>{{ $sheet->questions_choice_and_descriptive_count }}</td>
-                        <td>{{ $sheet->start_at_fa }}</td>
-                        <td>{{ $sheet->end_at_fa }}</td>
+                        <td>{{ $sheet->questions_multi_choice_and_descriptive_count }}</td>
                         <td>{{ $sheet->status_fa }}</td>
                         <td>{{ $sheet->created_at_fa }}</td>
-                        <td>{{ $sheet->responders->count() }}</td>
                         <td>
                             @if ($sheet->is_stated)
                                 @if (!$sheet->is_ended)
@@ -118,7 +116,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="11" class="text-center">نظرسنجی ایجاد نشده است</td>
+                        <td colspan="10" class="text-center">نظرسنجی ایجاد نشده است</td>
                     </tr>
                 @endforelse
             </tbody>

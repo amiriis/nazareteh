@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.panels')
 
 @section('title')
     ویرایش نظرسنجی ' {{ $sheet->name }} '

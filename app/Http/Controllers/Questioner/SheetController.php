@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Questioner;
 use App\Http\Controllers\Controller;
 use App\Models\Choice;
 use App\Models\Question;
+use App\Models\Responder;
 use App\Models\Sheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,7 +98,6 @@ class SheetController extends Controller
         if (!$sheet) abort(404);
 
         return view('questioner.sheets.edit', ['sheet' => $sheet]);
-        //
     }
 
     /**
@@ -236,6 +236,30 @@ class SheetController extends Controller
         $sheet->save();
 
         return redirect()->route('questioner.sheets.index')->with('success', "پایان  نظرسنجی $sheet->name");
+    }
+
+    public function report($id)
+    {
+        $sheet = Auth::user()->sheets->find($id);
+        if (!$sheet) abort(404);
+
+        return view('questioner.sheets.report.index', ['sheet' => $sheet]);
+    }
+
+    public function reportResponder(Sheet $sheet, Responder $responder)
+    {
+        if (!Auth::user()->sheets->find($sheet->id)) abort(404);
+        if (!$sheet->responders->find($responder->id)) abort(404);
+
+        return view('questioner.sheets.report.responder', ['sheet' => $sheet, 'responder' => $responder]);
+    }
+
+    public function reportQuestion(Sheet $sheet, Question $question)
+    {
+        if (!Auth::user()->sheets->find($sheet->id)) abort(404);
+        if (!$sheet->questions->find($question->id)) abort(404);
+
+        return view('questioner.sheets.report.question', ['sheet' => $sheet, 'question' => $question]);
     }
 
     private function createToken($id)

@@ -84,21 +84,25 @@ export function addQuestionBox({
     $('.question-forms').append(content)
 
     if (mode == 'add') {
-        addChoiceItem({
-            questionId: id,
-            questionMode: mode,
-            mode: 'add',
-            hasDisabled: true
-        })
+        for (let i = 0; i < 2; i++) {
+            addChoiceItem({
+                questionId: id,
+                questionMode: mode,
+                mode: 'add',
+                hasDisabled: true
+            })
+        }
     }
 
     if (mode == 'edit' && choice_count == 0) {
-        addChoiceItem({
-            questionId: id,
-            questionMode: mode,
-            mode: 'add',
-            hasDisabled: true
-        })
+        for (let i = 0; i < 2; i++) {
+            addChoiceItem({
+                questionId: id,
+                questionMode: mode,
+                mode: 'add',
+                hasDisabled: true
+            })
+        }
     }
 }
 

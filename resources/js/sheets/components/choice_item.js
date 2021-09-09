@@ -7,14 +7,14 @@ export function addChoiceItem({
     hasDisabled
 }) {
     const id = (mode == 'add') ? ($(`.choices-box-${questionId}`).find('.choice-container').last().data('choiceId') ?? 0) + 1 : createId
-    const isFirst = ($(`.choices-box-${questionId}`).find('.choice-container').length == 0) ? true : false
+    const isDefault = ($(`.choices-box-${questionId}`).find('.choice-container').length < 2) ? true : false
 
     let content = `<div class="choice-container input-group has-validation mb-3" id="choice-${questionId}-${id}" data-choice-id="${id}">
                         <input type="text"
                         class="form-control choice-input"
                         id="question[${questionMode}][${questionId}][choice][${mode}][${id}]"
                         name="question[${questionMode}][${questionId}][choice][${mode}][${id}]" value="${title ?? ``}" required ${hasDisabled ? 'disabled': ''}>
-                        ${!isFirst ?
+                        ${!isDefault ?
                        `<button class="btn btn-danger choice-item-delete" type="button"><i class="bi-trash"></i></button>`
                         : ``}
                         <div class="invalid-feedback">

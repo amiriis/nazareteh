@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -67,6 +68,18 @@ class Sheet extends Model
         return true;
     }
 
+    public function getAllTimeFaAttribute()
+    {
+        if ($this->end_at == null || $this->start_at == null)
+            return false;
+
+        $now = new DateTime("$this->end_at");
+        $ref = new DateTime("$this->start_at");
+        $diff = $now->diff($ref);
+
+        return sprintf('%d روز ، %d ساعت ، %d دقیقه', $diff->d, $diff->h, $diff->i);
+    }
+
     public function getStatusFaAttribute()
     {
         $text = '';
@@ -128,11 +141,21 @@ class Sheet extends Model
 
     public function getQuestionsChoiceCountAttribute()
     {
-        return $this->questions->where('has_descriptive', 0)->where('has_choice', 1)->count();
+        return $this->questions->where('has_descriptive', 0)->where('has_choice', 1)->where('has_multiple_choice', 0)->count();
+    }
+
+    public function getQuestionsMultiChoiceCountAttribute()
+    {
+        return $this->questions->where('has_descriptive', 0)->where('has_choice', 1)->where('has_multiple_choice', 1)->count();
     }
 
     public function getQuestionsChoiceAndDescriptiveCountAttribute()
     {
-        return $this->questions->where('has_descriptive', 1)->where('has_choice', 1)->count();
+        return $this->questions->where('has_descriptive', 1)->where('has_choice', 1)->where('has_multiple_choice', 0)->count();
+    }
+
+    public function getQuestionsMultiChoiceAndDescriptiveCountAttribute()
+    {
+        return $this->questions->where('has_descriptive', 1)->where('has_choice', 1)->where('has_multiple_choice', 1)->count();
     }
 }

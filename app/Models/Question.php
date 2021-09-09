@@ -37,4 +37,22 @@ class Question extends Model
     {
         return $this->choices->count();
     }
+
+    public function getTypeFaAttribute()
+    {
+        $text = '';
+
+        if ($this->has_choice && $this->has_multiple_choice && $this->has_descriptive)
+            $text = 'تشریحی + انتخابی';
+        elseif ($this->has_choice && $this->has_descriptive)
+            $text = 'تشریحی + گزینه ای';
+        elseif ($this->has_choice && $this->has_multiple_choice)
+            $text = 'انتخابی';
+        elseif ($this->has_choice)
+            $text = 'گزینه ای';
+        elseif ($this->has_descriptive)
+            $text = 'تشریحی';
+
+        return $text;
+    }
 }

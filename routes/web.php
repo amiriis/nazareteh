@@ -47,6 +47,8 @@ Route::prefix('questioner')->name('questioner.')->middleware(['role:Member'])->g
     Route::match(['put', 'patch'], 'sheets/{sheet}/start', [QuestionerSheets::class, 'start'])->name('sheets.start');
     Route::match(['put', 'patch'], 'sheets/{sheet}/end', [QuestionerSheets::class, 'end'])->name('sheets.end');
     Route::get('sheets/{sheet}/report', [QuestionerSheets::class, 'report'])->name('sheets.report');
+    Route::get('sheets/{sheet}/report/responder/{responder}', [QuestionerSheets::class, 'reportResponder'])->name('sheets.report.responder');
+    Route::get('sheets/{sheet}/report/question/{question}', [QuestionerSheets::class, 'reportQuestion'])->name('sheets.report.question');
 });
 
 Route::prefix('r')->name('reponder.')->group(function () {

@@ -35,7 +35,7 @@
                     <th scope="col" rowspan="2">نام</th>
                     <th scope="col" colspan="5">تعداد سوال ها</th>
                     <th scope="col" rowspan="2">وضعیت</th>
-                    <th scope="col" rowspan="2">تاریخ ثیت</th>
+                    <th scope="col" rowspan="2">تاریخ ثبت</th>
                     <th scope="col" rowspan="2">عملیات</th>
                 </tr>
                 <tr>

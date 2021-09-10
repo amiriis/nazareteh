@@ -21,8 +21,8 @@ $(function () {
 
         validQuestions.push({
             id: question.id,
-            valid_choice: question.has_choice ? false : true,
-            valid_descriptive: question.has_descriptive ? false : true
+            valid_choice: question.has_choice == 1 ? false : true,
+            valid_descriptive: question.has_descriptive == 1 ? false : true
         })
     }
 

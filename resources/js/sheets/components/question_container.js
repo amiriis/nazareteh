@@ -8,10 +8,6 @@ export function addQuestionContainer({
     choices,
 }) {
 
-    console.log('has_choice', has_choice);
-    console.log('has_multiple_choice', has_multiple_choice);
-    console.log('has_descriptive', has_descriptive);
-
     let content = `<div class="question-container" data-question-num="" data-question-id="${id}" aria-hidden="true">
                 <div class="h4 mb-3"><span class="question-num"></span>.<span class="question-title p-1">${title}</span>
                 </div>

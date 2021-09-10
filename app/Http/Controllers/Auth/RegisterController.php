@@ -38,7 +38,7 @@ class RegisterController extends Controller
         } elseif (auth()->user()->hasRole('Expert')) {
             return '/control-center';
         } elseif (auth()->user()->hasRole('Member')) {
-            return '/questioner';
+            return '/questioner/sheets';
         }
         return '/';
     }

@@ -8,13 +8,17 @@ export function addQuestionContainer({
     choices,
 }) {
 
+    console.log('has_choice', has_choice);
+    console.log('has_multiple_choice', has_multiple_choice);
+    console.log('has_descriptive', has_descriptive);
+
     let content = `<div class="question-container" data-question-num="" data-question-id="${id}" aria-hidden="true">
                 <div class="h4 mb-3"><span class="question-num"></span>.<span class="question-title p-1">${title}</span>
                 </div>
                 <p class="question-description mb-3">${description ?? ''}</p>`
-    if (has_choice) {
+    if (has_choice == 1) {
         content += `<div class="list-group mb-3">`
-        if (has_multiple_choice) {
+        if (has_multiple_choice == 1) {
             for (let index = 0; index < choices.length; index++) {
                 const choice = choices[index];
                 content += `<label class="list-group-item">
@@ -29,7 +33,7 @@ export function addQuestionContainer({
         }
         content += `</div>`
     }
-    if (has_descriptive) {
+    if (has_descriptive == 1) {
         content += `<div class="form-floating">
                     <textarea class = "form-control textarea-descriptive"
                     placeholder="پاسخ خود را بنویسید"
